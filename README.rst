@@ -1,24 +1,29 @@
-<title>
+XCore Parallel Matrix Manipulation
 .......
 
-:Stable release:  eg 0.5.1, 1.1.3, unreleased (see `versioning <https://github.com/xcore/Community/wiki/Versioning>`_)
+:Stable release:  0.1.0
 
-:Status:  eg, Feature complete, draft, idea, alpha
+:Status:  Alpha
 
-:Maintainer:  <name>, this should hyperlink to your github profile
+:Maintainer:  https://github.com/stevekerrison
 
-:Description:  A brief description of the repo
+:Description:  A library for doing matrix ops in parallel on XS1 hardware
 
 
 Key Features
 ============
 
-* <Bullet pointed list of features>
+* Straightforward matrix creation and re-dimensioning
+* Easy to use in XC or C
+* Row-major matrix layout
+* Congigurable level of parallelism
 
 To Do
 =====
 
-* <Bullet pointed list of missing features>
+* Ops on different size data types (e.g. matrix of chars, shorts, 64-bit)
+* Cell-wise ops such as addition and subtraction
+* Transformations, inversions and other common matrix ops
 
 Firmware Overview
 =================
@@ -28,15 +33,14 @@ Firmware Overview
 Known Issues
 ============
 
-* <Bullet pointed list of problems>
+* Early demonstration version, API may be unstable
 
 Required Repositories
 ================
 
-* <list of repos, likely to include xcommon if it uses the build system>
 * xcommon git\@github.com:xcore/xcommon.git
 
 Support
 =======
 
-<Description of support model>
+Issues can be submitted via Github issue tracker. Even better, submit patches/pull requests.
