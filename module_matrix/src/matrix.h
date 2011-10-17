@@ -42,4 +42,7 @@ int matrix_mul(int A[], short dimA[2], int B[], short dimB[2],
 			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
 
 
+int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
+			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
+
 #endif /* MATRIX_H_ */
