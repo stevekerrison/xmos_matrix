@@ -14,11 +14,9 @@
 #include "xc_pointer.h"
 
 #ifdef __XC__
-#define NULLABLE ?
-
+#define MATRIX_NULL() null, null
 #else
-#define NULLABLE
-
+#define MATRIX_NULL() 0, 0
 #endif
 
 #define MATRIX_CREATE(name,rows,columns,...) 			\
@@ -43,6 +41,9 @@ int matrix_mul(int A[], short dimA[2], int B[], short dimB[2],
 
 
 int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
+			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
+			
+int matrix_sca_mul(int A[], short dimA[2], int S,
 			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
 
 #endif /* MATRIX_H_ */

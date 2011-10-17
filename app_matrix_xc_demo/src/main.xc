@@ -33,10 +33,15 @@ int main(void)
 	MATRIX_CREATE(C,8,8,0);
 	timer t;
 	unsigned int tvA, tvB;
-	int ops;
+	int ops = 0;
+	
 	/* Time the operation in case we want to do some benchmarks :) */
 	t :> tvA;
-	ops = matrix_mul(MATRIX_REF(A),MATRIX_REF(B),MATRIX_REF(C),0);
+	/* In-place scalar multiplication */
+	ops += matrix_sca_mul(MATRIX_REF(A),11023,MATRIX_NULL(),0);
+	ops += matrix_sca_mul(MATRIX_REF(B),1798,MATRIX_NULL(),0);
+	/* Matrix-multiplication into destination matrix */
+	ops += matrix_mul(MATRIX_REF(A),MATRIX_REF(B),MATRIX_REF(C),0);
 	t :> tvB;
 	MATRIX_PRINT("A",A);
 	MATRIX_PRINT("B",B);

@@ -11,8 +11,14 @@
 #ifndef XC_POINTER_H_
 #define XC_POINTER_H_
 
-unsigned int pointer_int(int p[]);
-unsigned int pointer_short(short p[]);
-unsigned int pointer_char(char p[]);
+#ifdef __XC__
+#define NULLABLE ?
+#else
+#define NULLABLE
+#endif
+
+unsigned int pointer_int(int NULLABLE p[]);
+unsigned int pointer_short(short NULLABLE p[]);
+unsigned int pointer_char(char NULLABLE p[]);
 
 #endif //XC_POINTER_H_

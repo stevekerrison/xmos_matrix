@@ -24,6 +24,45 @@ int matrix_redim(short dims[4],short rows, short columns)
 	return rows * columns;
 }
 
+int matrix_sca_mul(int A[], short dimA[2], int S,
+	int ? C[], short ? dimC[2], char nThreads)
+{
+	int retval[8] = {0,0,0,0,0,0,0,0}, i;
+	int ptA = pointer_int(A), ptC = pointer_int(C),
+		ptDimA = pointer_short(dimA),
+		ptRetval = pointer_int(retval);
+	/* First do some sanity checks... */
+	if (isnull(C))
+	{
+		//No checks yet
+	}
+	else
+	{
+		if (dimC[1] < dimA[1])
+		{
+			return -4; //Not enough columns in destination matrix
+		}
+		if (dimC[0] < dimA[0])
+		{
+			return -5; //Not enough rows in destination matrix
+		}
+	}
+	if (isnull(C))
+	{
+		ptC = ptA;
+	}
+	par (int t = 0; t < NTHREADS; t++)
+	{
+		matrix_sca_mul_worker(ptA,ptDimA,S,ptC,ptRetval,
+			NTHREADS, t);
+	}
+	for (i = 1; i < 8; i++)
+	{
+		retval[0] += retval[i];
+	}
+	return retval[0];
+}
+
 int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
 	int ? C[], short ? dimC[2], char nThreads)
 {

@@ -50,7 +50,28 @@ void matrix_arr_mul_worker(int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	{
 		for (c = offset; c < clim; c += nThreads)
 		{
-			C[r * rlim + c] = A[r * rlim + c] + B[r * rlim + c];
+			C[r * rlim + c] = A[r * rlim + c] * B[r * rlim + c];
+			*ops += 1;
+		}
+	}
+	return;
+}
+
+void matrix_sca_mul_worker(int ptA, int ptDimA, int S, int ptC,
+	int ptOps, char nThreads, char offset)
+{
+	int *A = (int *)ptA, *C = (int *)ptC,
+		*ops = (int *)ptOps;
+	short *dimA = (short *)ptDimA;
+	int r,c;
+	ops += offset;
+	*ops = 0;
+	int rlim = dimA[0], clim = dimA[1];
+	for (r = 0; r < rlim; r++)
+	{
+		for (c = offset; c < clim; c += nThreads)
+		{
+			C[r * rlim + c] = A[r * rlim + c] * S;
 			*ops += 1;
 		}
 	}
