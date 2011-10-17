@@ -28,7 +28,8 @@ To Do
 Firmware Overview
 =================
 
-<One or more paragraphs detailing the functionality of modules and apps in this repo>
+Use module_matrix in applications that require matrix operations and have
+some spare threads.
 
 Known Issues
 ============
