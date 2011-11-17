@@ -24,7 +24,7 @@ int matrix_redim(short dims[4],short rows, short columns)
 	return rows * columns;
 }
 
-int matrix_sca_mul(int A[], short dimA[2], int S,
+int matrix_sca_op(enum matrix_ops op, int A[], short dimA[2], int S,
 	int ? C[], short ? dimC[2], char nThreads)
 {
 	int retval[8] = {0,0,0,0,0,0,0,0}, i;
@@ -53,7 +53,7 @@ int matrix_sca_mul(int A[], short dimA[2], int S,
 	}
 	par (int t = 0; t < MATRIX_NTHREADS; t++)
 	{
-		matrix_sca_mul_worker(ptA,ptDimA,S,ptC,ptRetval,
+		matrix_sca_worker(op,ptA,ptDimA,S,ptC,ptRetval,
 			MATRIX_NTHREADS, t);
 	}
 	for (i = 1; i < 8; i++)
@@ -63,7 +63,7 @@ int matrix_sca_mul(int A[], short dimA[2], int S,
 	return retval[0];
 }
 
-int matrix_arr_op(enum matrix_arrops op, int A[], short dimA[2], int B[], short dimB[2],
+int matrix_arr_op(enum matrix_ops op, int A[], short dimA[2], int B[], short dimB[2],
 	int ? C[], short ? dimC[2], char nThreads)
 {
 	int retval[8] = {0,0,0,0,0,0,0,0}, i;

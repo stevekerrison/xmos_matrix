@@ -38,7 +38,7 @@ void matrix_mul_worker(int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	return;
 }
 
-void matrix_arr_worker(enum matrix_arrops op, int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
+void matrix_arr_worker(enum matrix_ops op, int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	int ptOps, char nThreads, char offset)
 {
 	int *A = (int *)ptA, *B = (int *)ptB, *C = (int *)ptC,
@@ -75,7 +75,7 @@ void matrix_arr_worker(enum matrix_arrops op, int ptA, int ptDimA, int ptB, int 
 	return;
 }
 
-void matrix_sca_mul_worker(int ptA, int ptDimA, int S, int ptC,
+void matrix_sca_worker(enum matrix_ops op, int ptA, int ptDimA, int S, int ptC,
 	int ptOps, char nThreads, char offset)
 {
 	int *A = (int *)ptA, *C = (int *)ptC,
@@ -89,7 +89,23 @@ void matrix_sca_mul_worker(int ptA, int ptDimA, int S, int ptC,
 	{
 		for (c = offset; c < clim; c += nThreads)
 		{
-			C[r * rlim + c] = A[r * rlim + c] * S;
+			switch (op)
+			{
+			case ADD:
+				C[r * rlim + c] = A[r * rlim + c] + S;
+				break;
+			case SUB:
+				C[r * rlim + c] = A[r * rlim + c] - S;
+				break;
+			case MUL:
+				C[r * rlim + c] = A[r * rlim + c] * S;
+				break;
+			case DIV:
+				C[r * rlim + c] = A[r * rlim + c] / S;
+				break;
+			default:
+				break;	
+			}
 			*ops += 1;
 		}
 	}

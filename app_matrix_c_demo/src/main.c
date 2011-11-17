@@ -33,8 +33,8 @@ int main(void)
 	MATRIX_CREATE(C,8,8,0);
 	int ops = 0;
 	/* In-place scalar multiplication */
-	ops += matrix_sca_mul(MATRIX_REF(A),11023,MATRIX_NULL(),0);
-	ops += matrix_sca_mul(MATRIX_REF(B),1798,MATRIX_NULL(),0);
+	ops += matrix_sca_op(MUL,MATRIX_REF(A),11023,MATRIX_NULL(),0);
+	ops += matrix_sca_op(MUL,MATRIX_REF(B),1798,MATRIX_NULL(),0);
 	/* Matrix-multiplication into destination matrix */
 	ops += matrix_mul(MATRIX_REF(A),MATRIX_REF(B),MATRIX_REF(C),0);
 	MATRIX_PRINT("A",A);

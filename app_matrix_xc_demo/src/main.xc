@@ -38,12 +38,12 @@ int main(void)
 	/* Time the operation in case we want to do some benchmarks :) */
 	t :> tvA;
 	/* In-place scalar multiplication */
-	ops += matrix_sca_mul(MATRIX_REF(A),11023,MATRIX_NULL(),0);
-	ops += matrix_sca_mul(MATRIX_REF(B),1798,MATRIX_NULL(),0);
+	ops += matrix_sca_op(MUL,MATRIX_REF(A),11023,MATRIX_NULL(),0);
+	ops += matrix_sca_op(MUL,MATRIX_REF(B),1798,MATRIX_NULL(),0);
 	/* Matrix-multiplication into destination matrix */
 	ops += matrix_mul(MATRIX_REF(A),MATRIX_REF(B),MATRIX_REF(C),0);
 	ops += matrix_arr_op(ADD,MATRIX_REF(A),MATRIX_REF(B),MATRIX_NULL(),0);
-	//ops += matrix_arr_op(SUB,MATRIX_REF(A),MATRIX_REF(B),MATRIX_NULL(),0);
+	ops += matrix_arr_op(SUB,MATRIX_REF(A),MATRIX_REF(B),MATRIX_NULL(),0);
 	t :> tvB;
 	MATRIX_PRINT("A",A);
 	MATRIX_PRINT("B",B);
