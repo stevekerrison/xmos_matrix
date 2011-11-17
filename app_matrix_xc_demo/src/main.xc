@@ -42,6 +42,8 @@ int main(void)
 	ops += matrix_sca_mul(MATRIX_REF(B),1798,MATRIX_NULL(),0);
 	/* Matrix-multiplication into destination matrix */
 	ops += matrix_mul(MATRIX_REF(A),MATRIX_REF(B),MATRIX_REF(C),0);
+	ops += matrix_arr_op(ADD,MATRIX_REF(A),MATRIX_REF(B),MATRIX_NULL(),0);
+	//ops += matrix_arr_op(SUB,MATRIX_REF(A),MATRIX_REF(B),MATRIX_NULL(),0);
 	t :> tvB;
 	MATRIX_PRINT("A",A);
 	MATRIX_PRINT("B",B);

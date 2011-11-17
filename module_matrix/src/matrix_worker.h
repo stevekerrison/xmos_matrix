@@ -11,16 +11,20 @@
 #ifndef MATRIX_WORKER_H_
 #define MATRIX_WORKER_H_
 
+#include "matrix.h"
+
 // Number of threads to use
 // Specify this in your Makefile if you prefer
-#ifndef NTHREADS
-	#define NTHREADS 2
+#ifndef MATRIX_NTHREADS
+	#define MATRIX_NTHREADS 2
 #endif
+
+#define MATRIX_
 
 void matrix_mul_worker(int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	int ptOps, char nThreads, char offset);
 	
-void matrix_arr_mul_worker(int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
+void matrix_arr_worker(enum matrix_arrops op, int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	int ptOps, char nThreads, char offset);
 	
 void matrix_sca_mul_worker(int ptA, int ptDimA, int S, int ptC,

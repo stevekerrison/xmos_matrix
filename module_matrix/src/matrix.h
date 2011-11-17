@@ -32,6 +32,8 @@
 
 #define MATRIX_PRINT(display,name) matrix_print(display,name,dim##name)
 
+enum matrix_arrops { ADD, SUB, MUL, DIV };
+
 int matrix_redim(short dims[4],short rows, short columns);
 
 void matrix_print(char name[], int M[], short dimM[2]);
@@ -39,8 +41,7 @@ void matrix_print(char name[], int M[], short dimM[2]);
 int matrix_mul(int A[], short dimA[2], int B[], short dimB[2],
 			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
 
-
-int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
+int matrix_arr_op(enum matrix_arrops op, int A[], short dimA[2], int B[], short dimB[2],
 			int NULLABLE C[], short NULLABLE dimC[2], char nThreads);
 			
 int matrix_sca_mul(int A[], short dimA[2], int S,

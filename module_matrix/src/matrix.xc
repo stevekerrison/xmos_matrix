@@ -51,10 +51,10 @@ int matrix_sca_mul(int A[], short dimA[2], int S,
 	{
 		ptC = ptA;
 	}
-	par (int t = 0; t < NTHREADS; t++)
+	par (int t = 0; t < MATRIX_NTHREADS; t++)
 	{
 		matrix_sca_mul_worker(ptA,ptDimA,S,ptC,ptRetval,
-			NTHREADS, t);
+			MATRIX_NTHREADS, t);
 	}
 	for (i = 1; i < 8; i++)
 	{
@@ -63,7 +63,7 @@ int matrix_sca_mul(int A[], short dimA[2], int S,
 	return retval[0];
 }
 
-int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
+int matrix_arr_op(enum matrix_arrops op, int A[], short dimA[2], int B[], short dimB[2],
 	int ? C[], short ? dimC[2], char nThreads)
 {
 	int retval[8] = {0,0,0,0,0,0,0,0}, i;
@@ -92,10 +92,10 @@ int matrix_arr_mul(int A[], short dimA[2], int B[], short dimB[2],
 		//FIXME - Use a thread-safe strategy for in-place results
 		return -1; //In-place result not supported at the moment
 	}
-	par (int t = 0; t < NTHREADS; t++)
+	par (int t = 0; t < MATRIX_NTHREADS; t++)
 	{
-		matrix_arr_mul_worker(ptA,ptDimA,ptB,ptDimB,ptC,ptRetval,
-			NTHREADS, t);
+		matrix_arr_worker(op,ptA,ptDimA,ptB,ptDimB,ptC,ptRetval,
+			MATRIX_NTHREADS,t);
 	}
 	for (i = 1; i < 8; i++)
 	{
@@ -134,10 +134,10 @@ int matrix_mul(int A[], short dimA[2], int B[], short dimB[2],
 		//FIXME - Use a thread-safe strategy for in-place results
 		return -1; //In-place result not supported at the moment
 	}
-	par (int t = 0; t < NTHREADS; t++)
+	par (int t = 0; t < MATRIX_NTHREADS; t++)
 	{
 		matrix_mul_worker(ptA,ptDimA,ptB,ptDimB,ptC,ptRetval,
-			NTHREADS, t);
+			MATRIX_NTHREADS, t);
 	}
 	for (i = 1; i < 8; i++)
 	{
