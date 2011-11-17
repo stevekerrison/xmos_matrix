@@ -40,6 +40,6 @@ int main(void)
 	MATRIX_PRINT("A",A);
 	MATRIX_PRINT("B",B);
 	MATRIX_PRINT("C",C);
-	printf("Ops: %u\n",ops);
+	printf("MATRIX_NTHREADS: %u, Ops: %u\n",MATRIX_NTHREADS,ops);
 	return 0;
 }

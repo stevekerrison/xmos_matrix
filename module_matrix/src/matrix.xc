@@ -15,7 +15,7 @@
 
 int matrix_redim(short dims[4],short rows, short columns)
 {
-	if (dims[2] > rows || dims[3] > columns)
+	if (dims[2] < rows || dims[3] < columns)
 	{
 		return -1; //Larger than initial size
 	}
