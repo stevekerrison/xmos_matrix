@@ -89,8 +89,7 @@ int matrix_arr_op(enum matrix_ops op, int A[], short dimA[2], int B[], short dim
 	}
 	if (isnull(C))
 	{
-		//FIXME - Use a thread-safe strategy for in-place results
-		return -1; //In-place result not supported at the moment
+		ptC = ptA;
 	}
 	par (int t = 0; t < MATRIX_NTHREADS; t++)
 	{

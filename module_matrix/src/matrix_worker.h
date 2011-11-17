@@ -13,14 +13,6 @@
 
 #include "matrix.h"
 
-// Number of threads to use
-// Specify this in your Makefile if you prefer
-#ifndef MATRIX_NTHREADS
-	#define MATRIX_NTHREADS 2
-#endif
-
-#define MATRIX_
-
 void matrix_mul_worker(int ptA, int ptDimA, int ptB, int ptDimB, int ptC,
 	int ptOps, char nThreads, char offset);
 	

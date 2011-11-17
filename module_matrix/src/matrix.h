@@ -13,6 +13,12 @@
 
 #include "xc_pointer.h"
 
+// Number of threads to use
+// Specify this in your Makefile if you prefer
+#ifndef MATRIX_NTHREADS
+	#define MATRIX_NTHREADS 2
+#endif
+
 #ifdef __XC__
 #define MATRIX_NULL() null, null
 #else
@@ -24,7 +30,7 @@
 	short dim##name[4] = {rows,columns,rows,columns}
 	
 #define MATRIX_REDIM(name,rows,columns)				\
-	matrix_update(dim##name, rows, columns)	
+	matrix_redim(dim##name, rows, columns)	
 	
 #define MATRIX_REF(name) name, dim##name
 
@@ -32,7 +38,10 @@
 
 #define MATRIX_PRINT(display,name) matrix_print(display,name,dim##name)
 
-enum matrix_ops { ADD, SUB, MUL, DIV };
+#define MATRIX_ROWS(name) (dim##name[0])
+#define MATRIX_COLS(name) (dim##name[1])
+
+enum matrix_ops { ADD, SUB, MUL, DIV, SDIV, UDIV };
 
 int matrix_redim(short dims[4],short rows, short columns);
 

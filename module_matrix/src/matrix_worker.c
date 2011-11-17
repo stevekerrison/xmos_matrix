@@ -52,23 +52,28 @@ void matrix_arr_worker(enum matrix_ops op, int ptA, int ptDimA, int ptB, int ptD
 	{
 		for (c = offset; c < clim; c += nThreads)
 		{
+			int res, a = A[r * rlim + c], b = B[r * rlim + c];
 			switch (op)
 			{
 			case ADD:
-				C[r * rlim + c] = A[r * rlim + c] + B[r * rlim + c];
+				res = a + b;
 				break;
 			case SUB:
-				C[r * rlim + c] = A[r * rlim + c] - B[r * rlim + c];
+				res = a - b;
 				break;
 			case MUL:
-				C[r * rlim + c] = A[r * rlim + c] * B[r * rlim + c];
+				res = a * b;
 				break;
 			case DIV:
-				C[r * rlim + c] = A[r * rlim + c] / B[r * rlim + c];
+			case SDIV:
+				res = a / b;
 				break;
+			case UDIV:
+				res = (unsigned)a / (unsigned)b;
 			default:
 				break;	
 			}
+			C[r * rlim + c] = res;
 			*ops += 1;
 		}
 	}
@@ -89,23 +94,28 @@ void matrix_sca_worker(enum matrix_ops op, int ptA, int ptDimA, int S, int ptC,
 	{
 		for (c = offset; c < clim; c += nThreads)
 		{
+			int a = A[r * rlim + c], res;
 			switch (op)
 			{
 			case ADD:
-				C[r * rlim + c] = A[r * rlim + c] + S;
+				res = a + S;
 				break;
 			case SUB:
-				C[r * rlim + c] = A[r * rlim + c] - S;
+				res = a - S;
 				break;
 			case MUL:
-				C[r * rlim + c] = A[r * rlim + c] * S;
+				res = a * S;
 				break;
 			case DIV:
-				C[r * rlim + c] = A[r * rlim + c] / S;
+			case SDIV:
+				res = a / S;
 				break;
+			case UDIV:
+				res = (unsigned)a / (unsigned)S;
 			default:
 				break;	
 			}
+			C[r * rlim + c] = res;
 			*ops += 1;
 		}
 	}
